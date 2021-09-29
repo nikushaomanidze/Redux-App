@@ -22,7 +22,6 @@ const AddNotes = ({ navigation }) => {
     dispatch({ type: "AddTodo", title: title, id: id });
     setTitle("");
     navigation.goBack();
-    saveData(title);
   };
 
   return (
