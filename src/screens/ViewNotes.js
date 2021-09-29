@@ -1,76 +1,105 @@
-import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
-import { Text, FAB, List } from "react-native-paper";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { addnote, deletenote } from "../redux/notesApp";
+import Header from "../components/Header";
 
-function ViewNotes({ navigation }) {
-  const notes = useSelector((state) => state);
+const ViewNotes = ({ navigation }) => {
   const dispatch = useDispatch();
-  const addNote = (note) => dispatch(addnote(note));
-  const deleteNote = (id) => dispatch(deletenote(id));
+  const state = useSelector((state) => state);
+  console.log(state);
+
+  const deleteNote = (id) => {
+    dispatch({ type: "DELETE_TODO", id });
+  };
 
   return (
-    <>
-      <View style={styles.container}>
-        {notes.length === 0 ? (
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>You do not have any notes</Text>
-          </View>
-        ) : (
+    <SafeAreaView style={styles.container}>
+      <Header titleText="Team Name" />
+      {state.length === 0 ? (
+        <View>
+          <Text
+            style={{
+              fontSize: 25,
+              fontWeight: "500",
+              textAlign: "center",
+              marginTop: 250,
+            }}
+          >
+            please add team name
+          </Text>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "gray",
+              marginTop: 200,
+              width: 200,
+              height: 56,
+              borderRadius: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: 150,
+            }}
+            onPress={() => navigation.navigate("AddNotes")}
+          >
+            <Text style={{ fontSize: 30 }}>+ Add name</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View style={styles.box}>
           <FlatList
-            data={notes}
+            data={state}
+            keyExtractor={(item) => `${item.id}`}
             renderItem={({ item }) => (
-              <List.Item
-                title={item.note.noteTitle}
-                description={item.note.noteValue}
-                descriptionNumberOfLines={1}
-                titleStyle={styles.listTitle}
+              <TouchableOpacity
                 onPress={() => deleteNote(item.id)}
-              />
+                style={{
+                  borderRadius: 30,
+                  width: 350,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingHorizontal: 40,
+                  height: 50,
+                  backgroundColor: "tomato",
+                  marginTop: 20,
+                }}
+              >
+                <Text style={{ fontSize: 30 }}>{item.title}</Text>
+              </TouchableOpacity>
             )}
-            keyExtractor={(item) => item.id.toString()}
           />
-        )}
-        <FAB
-          style={styles.fab}
-          small
-          icon="plus"
-          label="Add new note"
-          onPress={() =>
-            navigation.navigate("AddNotes", {
-              addNote,
-            })
-          }
-        />
-      </View>
-    </>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "gray",
+              marginTop: 200,
+              width: 200,
+              height: 56,
+              borderRadius: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: 150,
+            }}
+            onPress={() => navigation.navigate("AddNotes")}
+          >
+            <Text style={{ fontSize: 30 }}>+ Add name</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
   },
-  titleContainer: {
+  box: {
     alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-  },
-  fab: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 10,
-  },
-  listTitle: {
-    fontSize: 20,
   },
 });
 

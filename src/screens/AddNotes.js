@@ -1,84 +1,84 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { IconButton, TextInput, FAB } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  SafeAreaView,
+  TextInput,
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import Header from "../components/Header";
 
-function AddNote({ navigation }) {
-  const [noteTitle, setNoteTitle] = useState("");
-  const [noteValue, setNoteValue] = useState("");
+const AddNotes = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  console.log(state);
 
-  function onSaveNote() {
-    navigation.state.params.addNote({ noteTitle, noteValue });
+  const [title, setTitle] = useState("");
+
+  const addHandler = (id, title) => {
+    dispatch({ type: "AddTodo", title: title, id: id });
+    setTitle("");
     navigation.goBack();
-  }
-  return (
-    <>
-      <View style={styles.container}>
-        <IconButton
-          icon="close"
-          size={25}
-          color="white"
-          onPress={() => navigation.goBack()}
-          style={styles.iconButton}
-        />
+    saveData(title);
+  };
 
-        <TextInput
-          label="Add Title Here"
-          value={noteTitle}
-          mode="outlined"
-          onChangeText={setNoteTitle}
-          style={styles.title}
-        />
-        <TextInput
-          label="Add Note Here"
-          value={noteValue}
-          onChangeText={setNoteValue}
-          mode="flat"
-          multiline={true}
-          style={styles.text}
-          scrollEnabled={true}
-          returnKeyType="done"
-          blurOnSubmit={true}
-        />
-        <FAB
-          style={styles.fab}
-          small
-          icon="check"
-          disabled={noteTitle == "" ? true : false}
-          onPress={() => onSaveNote()}
-        />
+  return (
+    <SafeAreaView style={styles.container}>
+      <Header titleText="Add a Tam name" />
+      <View
+        style={{ marginTop: 50, alignItems: "center", marginHorizontal: 10 }}
+      >
+        <View style={styles.container1}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="players name"
+            placeholderTextColor="#6E7FAA"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={title}
+            onChangeText={(text) => setTitle(text)}
+          />
+        </View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "purple",
+            marginBottom: 100,
+            borderRadius: 50,
+            width: 100,
+            height: 70,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 100,
+            marginLeft: 150,
+          }}
+          onPress={() => addHandler(Math.random() * 666, title)}
+        >
+          <Text style={{ fontSize: 40 }}>✔️</Text>
+        </TouchableOpacity>
       </View>
-    </>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
   },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    margin: 10,
+  container1: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    borderColor: "#E8E8E8",
+    borderWidth: 2,
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
   },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  text: {
-    marginTop: 100,
-    height: 300,
-    fontSize: 16,
-  },
-  fab: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 0,
+  textInput: {
+    flex: 1,
   },
 });
 
-export default AddNote;
+export default AddNotes;
