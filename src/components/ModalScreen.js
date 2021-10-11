@@ -1,5 +1,6 @@
 import React  from 'react'
-import {View, Text,StyleSheet, Modal ,TouchableHighlight} from 'react-native'
+import {View, Text,StyleSheet, Modal ,TouchableHighlight, TouchableWithoutFeedback} from 'react-native'
+
 
 
 function ModalScreen(props){
@@ -10,13 +11,11 @@ function ModalScreen(props){
     animationType="slide"
     transparent={true}
     >
-    
-
-    <TouchableHighlight  style={styles.modalBackGroundStyle} onPress={props.ModalClose}  underlayColor="tranparant">
-      <View/>
-      </TouchableHighlight>
-      <View style={styles.modalStyle}>
-        <Text style={styles.modalTextStyle}>hello this is modal,hello this is modallllll,
+    <TouchableHighlight  style={styles.modalBackGroundStyle} onPress={props.ModalClose}   underlayColor="transparant">
+    <TouchableWithoutFeedback >
+    <View style={styles.modalStyle}  >
+        <Text style={styles.modalTextStyle}>
+          hello this is modal,hello this is modallllll,
           hello this is modal,hello this is modallllll,
           hello this is modal,hello this is modallllll,
           hello this is modal,hello this is modallllll
@@ -29,6 +28,10 @@ function ModalScreen(props){
           hello this is modal,hello this is modallllll,
           hello this is modal,hello this is modallllll</Text>
       </View>
+          </TouchableWithoutFeedback>
+  
+      </TouchableHighlight>
+      
     </Modal>
   )}
 
@@ -36,14 +39,15 @@ function ModalScreen(props){
   modalBackGroundStyle:{
   flex:1,
   backgroundColor:'transparent',
+  justifyContent:'center',
+  alignItems:'center',
+  padding:30
 },
 modalStyle:{
-marginTop:250,
 backgroundColor:'red',
 borderRadius:30,
 padding:30,
-zIndex:1,
-position:'absolute'
+
 },
 modalTextStyle:{
   marginTop:10,
