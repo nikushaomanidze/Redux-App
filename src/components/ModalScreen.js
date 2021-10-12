@@ -11,7 +11,7 @@ function ModalScreen(props){
     animationType="slide"
     transparent={true}
     >
-    <TouchableHighlight  style={styles.modalBackGroundStyle} onPress={props.ModalClose}   underlayColor="transparant">
+    <TouchableHighlight  style={styles.modalBackGroundStyle} onPress={props.ModalClose}   activeOpacity={0.5} underlayColor="black">
     <TouchableWithoutFeedback >
     <View style={styles.modalStyle}  >
         <Text style={styles.modalTextStyle}>

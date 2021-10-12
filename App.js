@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./src/redux/store";
 import SettingScreen from './src/screens/SettingScreen'
-
+import StartScreen from './src/screens/StartScreen'
 
 const Stack = createStackNavigator();
 
@@ -31,6 +31,11 @@ export default function App() {
           <Stack.Screen
             name="SettingScreen"
             component={SettingScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="StartScreen"
+            component={StartScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

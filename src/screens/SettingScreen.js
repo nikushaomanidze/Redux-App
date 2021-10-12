@@ -1,9 +1,8 @@
 import React ,{useState} from 'react'
 import {View, Text,TouchableOpacity,StyleSheet, } from 'react-native'
-import { TouchableHighlight } from 'react-native-gesture-handler'
 import ModalScreen from '../components/ModalScreen'
 
-export default function SettingScreen(){
+export default function SettingScreen({navigation}){
   const [openModal,setOpenmodal]=useState(false)
   return(
     <View style={styles.container}  >
@@ -11,8 +10,11 @@ export default function SettingScreen(){
    <ModalScreen ModalOpen={openModal} ModalClose={()=>setOpenmodal(false)} />      
    <TouchableOpacity style={styles.buttonStyle}  onPress={()=>setOpenmodal(true)}>
      <Text>open modal !</Text>
-   </TouchableOpacity>
-<Text style={{fontSize:30}}>Text</Text>
+   </TouchableOpacity >
+   <TouchableOpacity style={{backgroundColor:'blue', padding:10, borderRadius:30, marginTop:30}} onPress={()=>navigation.navigate('StartScreen')}>
+    <Text style={{fontSize:30}}>panResponder screen  </Text>
+     </TouchableOpacity>
+
    </View>
   )}
 
