@@ -1,73 +1,103 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Animated, View, StyleSheet, PanResponder, Text } from "react-native";
+import {Dimensions} from 'react-native';
 
 const StartScreen = () => {
+   const HEIGHT = Dimensions.get('window').height;
+  const pan = useRef(new Animated.ValueXY()).current;
 
-  const pan = useState(new Animated.ValueXY())[0];
-  const panResponder = useState(
+console.log(pan.ValueY)
+  const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
         pan.setOffset({
-          x: pan.x._value,
           y: pan.y._value
         });
       },
-      onPanResponderMove: Animated.event(
-        [
-            null,
-          { dx: pan.x, dy: pan.y },
-        ]
-      ),
+
+
+
+  onPanResponderMove:
+   Animated.event(
+     [null,  {  dy: pan.y }] ,
+     {useNativeDriver:false}),
+
+ //     onPanResponderMove:(...args)=>{
+  // console.log('ARGS',{...args[1]})
+  //       },
+
+
+
+
+
       onPanResponderRelease: () => {
         pan.flattenOffset();
-
+        //  console.log(pan.y);
+        //  console.log(HEIGHT/4)
+        // if(pan.y > HEIGHT/5){
+        //   console.log('hello')
+        //  } 
       }
     })
-  )[0];
+  ).current;
 
-
-  const [xlocation,setXlocation]= useState(pan.x._value)
-  const [ylocation,setylocation]= useState(pan.y._value)
 
   return (
     <View style={styles.container}>
-
-        {/* ტექსტის სახით მინდა გამოვსახო ბოქსის მდებარეობა  */}
-      <Text style={styles.titleText}>{xlocation}</Text>
-      <Text style={styles.titleText}>{ylocation}</Text>
-
+      <View style={{backgroundColor:'orange',marginTop:0,width:'120%',
+      height:'20%',borderBottomLeftRadius:200,borderBottomRightRadius:200,justifyContent:'flex-end',alignItems:'center',}}>
+        <Text style={{marginBottom:30}}>Game Screen</Text>
+      </View>
       <Animated.View
         style={{
-          transform: [{ translateX: pan.x }, { translateY: pan.y }]
+          flex:1,
+          justifyContent:'center',
+           zIndex:1,
+          transform: [ { translateY: pan.y }]
         }}
         {...panResponder.panHandlers}
-      >  
-        <View style={styles.box} />
+      >
+        <View style={styles.box}  >
+          <Text style={{fontSize:30, fontWeight:'bold',color:'white',}}>თამაშიhhhhhhd</Text>
+        </View>
       </Animated.View>
+
+
+      <View style={{backgroundColor:'gray',marginBottom:0,width:'120%',
+      height:'20%',borderTopLeftRadius:200,borderTopRightRadius:200}}>
+        <Text>hello</Text>
+      </View>
     </View>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    justifyContent:"space-between",
+    alignItems:'center'
   },
   titleText: {
-    marginBottom:10,
     fontSize: 14,
     lineHeight: 24,
     fontWeight: "bold"
   },
   box: {
-    height: 150,
-    width: 150,
-    backgroundColor: "pink",
-    borderRadius: 100,
-    marginBottom:10
-  }
+    zIndex:1,
+    opacity:0.5,
+    height:250,
+    width: 250,
+    backgroundColor: "purple",
+    borderRadius: 150,
+    justifyContent:'center',
+    alignItems:'center',
+    padding:5,
+    shadowColor: "#171717",
+    shadowOffset: { width: -8, height: 10 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    }
 });
 
 export default StartScreen;

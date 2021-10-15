@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./src/redux/store";
 import SettingScreen from './src/screens/SettingScreen'
 import StartScreen from './src/screens/StartScreen'
+import GameScreen from './src/screens/GameScreen'
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,11 @@ export default function App() {
           <Stack.Screen
             name="StartScreen"
             component={StartScreen}
+            options={{ headerShown: false }}
+          />
+           <Stack.Screen
+            name="GameScreen"
+            component={GameScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
