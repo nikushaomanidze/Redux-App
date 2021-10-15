@@ -6,7 +6,7 @@ const StartScreen = () => {
    const HEIGHT = Dimensions.get('window').height;
   const pan = useRef(new Animated.ValueXY()).current;
 
-console.log(pan.ValueY)
+console.log(HEIGHT)
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
@@ -16,8 +16,6 @@ console.log(pan.ValueY)
         });
       },
 
-
-
   onPanResponderMove:
    Animated.event(
      [null,  {  dy: pan.y }] ,
@@ -26,10 +24,6 @@ console.log(pan.ValueY)
  //     onPanResponderMove:(...args)=>{
   // console.log('ARGS',{...args[1]})
   //       },
-
-
-
-
 
       onPanResponderRelease: () => {
         pan.flattenOffset();
@@ -59,7 +53,7 @@ console.log(pan.ValueY)
         {...panResponder.panHandlers}
       >
         <View style={styles.box}  >
-          <Text style={{fontSize:30, fontWeight:'bold',color:'white',}}>თამაშიhhhhhhd</Text>
+          <Text style={{fontSize:30, fontWeight:'bold',color:'white',}}>game</Text>
         </View>
       </Animated.View>
 
