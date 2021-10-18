@@ -10,6 +10,7 @@ import { store, persistor } from "./src/redux/store";
 import SettingScreen from './src/screens/SettingScreen'
 import StartScreen from './src/screens/StartScreen'
 import GameScreen from './src/screens/GameScreen'
+import AnimationScreen from './src/screens/AnimationScreen'
 
 const Stack = createStackNavigator();
 
@@ -44,9 +45,19 @@ export default function App() {
             component={GameScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="AnimationScreen"
+            component={AnimationScreen}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PersistGate>
     </Provider>
   );
 }
+
+
+
+
+

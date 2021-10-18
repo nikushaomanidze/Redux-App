@@ -53,7 +53,7 @@ console.log(HEIGHT)
         {...panResponder.panHandlers}
       >
         <View style={styles.box}  >
-          <Text style={{fontSize:30, fontWeight:'bold',color:'white',}}>game</Text>
+          <Text style={{fontSize:30, fontWeight:'bold',color:'white',zIndex:2,position:'absolute'}}>game</Text>
         </View>
       </Animated.View>
 
