@@ -11,6 +11,7 @@ import SettingScreen from './src/screens/SettingScreen'
 import StartScreen from './src/screens/StartScreen'
 import GameScreen from './src/screens/GameScreen'
 import AnimationScreen from './src/screens/AnimationScreen'
+import LoginScreen from './src/screens/LoginScreen'
 
 const Stack = createStackNavigator();
 
@@ -50,6 +51,12 @@ export default function App() {
             component={AnimationScreen}
             options={{ headerShown: false }}
           />
+         <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </PersistGate>

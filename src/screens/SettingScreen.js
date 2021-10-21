@@ -45,7 +45,9 @@ export default function SettingScreen({navigation}){
      <TouchableOpacity style={{backgroundColor:'blue', padding:10, borderRadius:30, marginTop:30}} onPress={()=>navigation.navigate('AnimationScreen')}>
     <Text style={{fontSize:30}}>Animaton Screen  </Text>
      </TouchableOpacity>
-
+     <TouchableOpacity style={{backgroundColor:'blue', padding:10, borderRadius:30, marginTop:30}} onPress={()=>navigation.navigate('LoginScreen')}>
+    <Text style={{fontSize:30}}>login Screen</Text>
+     </TouchableOpacity>
    </View>
   )}
 
